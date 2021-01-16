@@ -17,6 +17,8 @@
 		F2FB92C125B36A3200206CEE /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FB92C025B36A3100206CEE /* Characters.swift */; };
 		F2FB92C525B36BB000206CEE /* RMError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FB92C425B36BB000206CEE /* RMError.swift */; };
 		F2FB92CA25B36C5200206CEE /* CharactersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FB92C925B36C5200206CEE /* CharactersVC.swift */; };
+		F2FB92DC25B3793A00206CEE /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FB92DA25B3793A00206CEE /* CharacterCell.swift */; };
+		F2FB92DD25B3793A00206CEE /* CharacterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2FB92DB25B3793A00206CEE /* CharacterCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		F2FB92C025B36A3100206CEE /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
 		F2FB92C425B36BB000206CEE /* RMError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMError.swift; sourceTree = "<group>"; };
 		F2FB92C925B36C5200206CEE /* CharactersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersVC.swift; sourceTree = "<group>"; };
+		F2FB92DA25B3793A00206CEE /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
+		F2FB92DB25B3793A00206CEE /* CharacterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 		F2FB929F25B364B800206CEE /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				F2FB92D025B3722000206CEE /* CustomViews */,
 				F2FB92CD25B36C5D00206CEE /* Storyboards */,
 				F2FB92C325B36BA200206CEE /* Constants */,
 				F2FB92B825B366E500206CEE /* Managers */,
@@ -127,6 +132,23 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		F2FB92D025B3722000206CEE /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				F2FB92D125B3722A00206CEE /* Cells */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		F2FB92D125B3722A00206CEE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F2FB92DA25B3793A00206CEE /* CharacterCell.swift */,
+				F2FB92DB25B3793A00206CEE /* CharacterCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -187,6 +209,7 @@
 				F2FB92AD25B364BC00206CEE /* LaunchScreen.storyboard in Resources */,
 				F2FB92AA25B364BC00206CEE /* Assets.xcassets in Resources */,
 				F2FB92A825B364B800206CEE /* Main.storyboard in Resources */,
+				F2FB92DD25B3793A00206CEE /* CharacterCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,6 +223,7 @@
 				F2FB92C525B36BB000206CEE /* RMError.swift in Sources */,
 				F2FB92BA25B369CA00206CEE /* NetworkManager.swift in Sources */,
 				F2FB92C125B36A3200206CEE /* Characters.swift in Sources */,
+				F2FB92DC25B3793A00206CEE /* CharacterCell.swift in Sources */,
 				F2FB92BE25B36A1700206CEE /* Character.swift in Sources */,
 				F2FB92A125B364B800206CEE /* AppDelegate.swift in Sources */,
 				F2FB92CA25B36C5200206CEE /* CharactersVC.swift in Sources */,
