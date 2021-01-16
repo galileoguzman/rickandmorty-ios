@@ -80,15 +80,15 @@ class CharactersVC: UIViewController {
 }
 
 extension CharactersVC:UITableViewDelegate, UITableViewDataSource {
-    internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return self.characters.count
     }
     
-    internal func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(CharacterCell.heightCell)
     }
     
-    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Cell
         let cell = tableView.dequeueReusableCell(
             withIdentifier: CharacterCell.reuseID,
@@ -101,6 +101,10 @@ extension CharactersVC:UITableViewDelegate, UITableViewDataSource {
         cell.downloadImage(from: character.image)
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Show detail of article \(indexPath.row)")
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
