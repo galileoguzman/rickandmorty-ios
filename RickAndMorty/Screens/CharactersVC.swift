@@ -17,6 +17,8 @@ class CharactersVC: UIViewController {
     var page = 0
 
     @IBOutlet weak var tblCharacters: UITableView!
+    var refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,7 +28,7 @@ class CharactersVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = "Popular movies"
+        navigationItem.title = "Ryck and morty characters"
     }
     
     func initController(){
@@ -41,12 +43,16 @@ class CharactersVC: UIViewController {
             UINib(nibName: "CharacterCell", bundle: nil),
             forCellReuseIdentifier: CharacterCell.reuseID
         )
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(updateData), for: .valueChanged)
+        tblCharacters.addSubview(refreshControl)
+        
         
         // Get characters from the API
-        getCharacters()
+        getCharacters(page: page)
     }
     
-    func getCharacters(){
+    func getCharacters(page: Int){
         NetworkManager.shared.getCharacters(for: page) { [weak self] result in
             
             guard let self = self else { return }
@@ -54,6 +60,7 @@ class CharactersVC: UIViewController {
             switch result {
                 case .success(let characters):
                     self.characters.append(contentsOf: characters.results)
+                    self.reloadData()
                 case .failure(let error):
                     print("Error calling service")
                     print(error.rawValue)
@@ -61,13 +68,18 @@ class CharactersVC: UIViewController {
         }
     }
     
-    func updateData(on newCharacters: [Character]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Character>()
-        snapshot.appendSections([.first])
-        snapshot.appendItems(newCharacters)
-        
+    @objc fileprivate func updateData() {
+        // Function in charge to reset all articles.
+        page = 1
+        getCharacters(page: page)
+    }
+    
+    private func reloadData() {
+        // Function in charge to refresh UI with articles
         DispatchQueue.main.async {
-            //self.dataSource.apply(snapshot, animatingDifferences: true)
+            self.tblCharacters.reloadData()
+            
+            self.refreshControl.endRefreshing()
         }
     }
 }
@@ -83,18 +95,6 @@ extension CharactersVC:UITableViewDelegate, UITableViewDataSource {
     
     internal func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
-    }
-    
-    internal func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // Will fetch more articles
-//        if indexPath.row == (self.articles.count - 1){
-//            page += 1
-//            self.fetchArticles(page: page)
-//        }
-    }
-    
-    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Show detail of article")
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
