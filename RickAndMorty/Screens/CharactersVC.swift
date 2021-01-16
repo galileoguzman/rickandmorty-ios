@@ -27,7 +27,7 @@ class CharactersVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.title = "Ryck and morty characters"
+        navigationItem.title = "Ryck and morty"
     }
     
     func initController(){
@@ -48,6 +48,9 @@ class CharactersVC: UIViewController {
     }
     
     func getCharacters(page: Int){
+        
+        showLoadingView()
+        
         NetworkManager.shared.getCharacters(for: page) { [weak self] result in
             
             guard let self = self else { return }
@@ -62,6 +65,9 @@ class CharactersVC: UIViewController {
                     print("Error calling service")
                     print(error.rawValue)
             }
+            
+            self.dismissLoadingView()
+            
         }
     }
     
@@ -91,17 +97,19 @@ extension CharactersVC:UITableViewDelegate, UITableViewDataSource {
         
         // Set data
         let character = self.characters[indexPath.row]
+        cell.lblName.text = character.name
         cell.downloadImage(from: character.image)
         
         return cell
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        let height = scrollView.frame.size.height
         
-        if (offsetY > contentHeight - height) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.frame.size.height
+        let height = scrollView.contentSize.height
+        
+        if ((offsetY + contentHeight) == height) {
             page += 1
             getCharacters(page: page)
         }

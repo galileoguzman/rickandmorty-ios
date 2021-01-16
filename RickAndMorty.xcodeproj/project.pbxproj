@@ -19,6 +19,7 @@
 		F2FB92CA25B36C5200206CEE /* CharactersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FB92C925B36C5200206CEE /* CharactersVC.swift */; };
 		F2FB92DC25B3793A00206CEE /* CharacterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FB92DA25B3793A00206CEE /* CharacterCell.swift */; };
 		F2FB92DD25B3793A00206CEE /* CharacterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2FB92DB25B3793A00206CEE /* CharacterCell.xib */; };
+		F2FB92E325B3846800206CEE /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FB92E225B3846800206CEE /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		F2FB92C925B36C5200206CEE /* CharactersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersVC.swift; sourceTree = "<group>"; };
 		F2FB92DA25B3793A00206CEE /* CharacterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCell.swift; sourceTree = "<group>"; };
 		F2FB92DB25B3793A00206CEE /* CharacterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CharacterCell.xib; sourceTree = "<group>"; };
+		F2FB92E225B3846800206CEE /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		F2FB929F25B364B800206CEE /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				F2FB92E125B3844600206CEE /* Extensions */,
 				F2FB92D025B3722000206CEE /* CustomViews */,
 				F2FB92CD25B36C5D00206CEE /* Storyboards */,
 				F2FB92C325B36BA200206CEE /* Constants */,
@@ -149,6 +152,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F2FB92E125B3844600206CEE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F2FB92E225B3846800206CEE /* UIViewController+Ext.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -228,6 +239,7 @@
 				F2FB92A125B364B800206CEE /* AppDelegate.swift in Sources */,
 				F2FB92CA25B36C5200206CEE /* CharactersVC.swift in Sources */,
 				F2FB92A325B364B800206CEE /* SceneDelegate.swift in Sources */,
+				F2FB92E325B3846800206CEE /* UIViewController+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
