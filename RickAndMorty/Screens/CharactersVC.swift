@@ -17,7 +17,6 @@ class CharactersVC: UIViewController {
     var page = 0
 
     @IBOutlet weak var tblCharacters: UITableView!
-    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +42,6 @@ class CharactersVC: UIViewController {
             UINib(nibName: "CharacterCell", bundle: nil),
             forCellReuseIdentifier: CharacterCell.reuseID
         )
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(updateData), for: .valueChanged)
-        tblCharacters.addSubview(refreshControl)
-        
         
         // Get characters from the API
         getCharacters(page: page)
@@ -59,8 +54,10 @@ class CharactersVC: UIViewController {
             
             switch result {
                 case .success(let characters):
-                    self.characters.append(contentsOf: characters.results)
-                    self.reloadData()
+                    if(characters.results.count > 0){
+                        self.characters.append(contentsOf: characters.results)
+                        self.reloadData()
+                    }
                 case .failure(let error):
                     print("Error calling service")
                     print(error.rawValue)
@@ -68,18 +65,10 @@ class CharactersVC: UIViewController {
         }
     }
     
-    @objc fileprivate func updateData() {
-        // Function in charge to reset all articles.
-        page = 1
-        getCharacters(page: page)
-    }
-    
     private func reloadData() {
         // Function in charge to refresh UI with articles
         DispatchQueue.main.async {
             self.tblCharacters.reloadData()
-            
-            self.refreshControl.endRefreshing()
         }
     }
 }
@@ -91,10 +80,6 @@ extension CharactersVC:UITableViewDelegate, UITableViewDataSource {
     
     internal func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(CharacterCell.heightCell)
-    }
-    
-    internal func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,5 +94,16 @@ extension CharactersVC:UITableViewDelegate, UITableViewDataSource {
         cell.downloadImage(from: character.image)
         
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if (offsetY > contentHeight - height) {
+            page += 1
+            getCharacters(page: page)
+        }
     }
 }
